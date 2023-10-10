@@ -1,0 +1,31 @@
+server:
+  port: 81
+  servlet:
+    context-path: /sq
+
+logging:
+  level:
+    root: info
+
+
+
+# ------------
+#country: USA
+#user:
+#  name: Raymondmuzzi
+#
+#datasource:
+#  driver: com.mysql.jdbc.Driver
+#  username: root
+#  password: root
+#  url: jdbc:mysql://localhost/springboot_db
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/ssm_db
+    driver-class-name: com.mysql.jdbc.Driver
+
+#
+
+
