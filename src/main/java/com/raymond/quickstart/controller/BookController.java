@@ -1,9 +1,13 @@
 package com.raymond.quickstart.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.raymond.quickstart.domain.Book;
 import com.raymond.quickstart.domain.R;
 import com.raymond.quickstart.serivce.BookService;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.math.BigDecimal;
 
 /**
  * Book controller
@@ -22,7 +26,10 @@ public class BookController {
     }
 
     @PostMapping
-    public R addBook(@RequestBody Book book) {
+    public R addBook(@RequestBody Book book) throws IOException {
+        if ("123".equals(book.getName())) {
+            throw new IOException("Mock exception!");
+        }
         return new R(bookService.save(book), null);
     }
 
@@ -38,7 +45,7 @@ public class BookController {
 
     @GetMapping("/{id}")
     public R getById(@PathVariable("id") Integer id) {
-        return new R(bookService.getById(id));
+        return new R(true, bookService.getById(id));
     }
 
     @GetMapping
@@ -48,7 +55,13 @@ public class BookController {
 
     @GetMapping("/{pageNo}/{pageSize}")
     public R getPage(@PathVariable("pageNo") int pageNo,
-                     @PathVariable("pageSize") int pageSize) {
-        return new R(true, bookService.getByPage(pageNo, pageSize));
+                     @PathVariable("pageSize") int pageSize,
+                     @RequestParam(value = "name", required = false) String name,
+                     @RequestParam(value = "price", required = false) BigDecimal price) {
+        IPage<Book> page = bookService.getByPage(pageNo, pageSize, name, price);
+        if (page.getCurrent() > page.getPages()) {
+            page = bookService.getByPage((int) page.getPages(), pageSize, name, price);
+        }
+        return new R(true, page);
     }
 }

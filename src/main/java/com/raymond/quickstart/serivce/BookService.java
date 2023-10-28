@@ -3,6 +3,7 @@ package com.raymond.quickstart.serivce;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.raymond.quickstart.domain.Book;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -56,7 +57,9 @@ public interface BookService {
      *
      * @param pageNo   page no
      * @param pageSize page size
+     * @param name     book name
+     * @param price    book price
      * @return book page list
      */
-    IPage<Book> getByPage(int pageNo, int pageSize);
+    IPage<Book> getByPage(int pageNo, int pageSize, String name, BigDecimal price);
 }

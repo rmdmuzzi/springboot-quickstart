@@ -2,12 +2,14 @@ package com.raymond.quickstart.serivce.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.raymond.quickstart.dao.BookDao;
 import com.raymond.quickstart.domain.Book;
 import com.raymond.quickstart.serivce.BookService;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -65,9 +67,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public IPage<Book> getByPage(int pageNo, int pageSize) {
+    public IPage<Book> getByPage(int pageNo, int pageSize,
+                                 String name, BigDecimal price) {
         IPage<Book> bookPage = new Page<>(pageNo, pageSize);
-        bookDao.selectPage(bookPage, null);
+        LambdaQueryWrapper<Book> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotBlank(name), Book::getName, name);
+        queryWrapper.eq(price != null, Book::getPrice, price);
+        bookDao.selectPage(bookPage, queryWrapper);
         return bookPage;
     }
 }

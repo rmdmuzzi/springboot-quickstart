@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class R {
     private Object data;
-    private String msg;
+    private String resMsg;
     private Long timestamp = System.currentTimeMillis();
     private Boolean flag = false;
 

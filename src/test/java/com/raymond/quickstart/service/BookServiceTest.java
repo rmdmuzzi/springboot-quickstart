@@ -62,9 +62,10 @@ class BookServiceTest {
 
     @Test
     void testGetByPage() {
-        IPage<Book> bookList = bookService.getByPage(2, 3);
-        for (Book book : bookList.getRecords()) {
-            LOGGER.info("test get by page -> {}", JsonUtil.getJsonString(book));
+        Book book = new Book();
+        IPage<Book> bookList = bookService.getByPage(2, 3, book.getName(), book.getPrice());
+        for (Book b : bookList.getRecords()) {
+            LOGGER.info("test get by page -> {}", JsonUtil.getJsonString(b));
         }
     }
 }
