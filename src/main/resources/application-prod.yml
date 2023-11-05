@@ -1,0 +1,9 @@
+# prod profile
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+logging:
+  level:
+    root: warn

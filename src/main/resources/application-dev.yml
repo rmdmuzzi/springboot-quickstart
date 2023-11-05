@@ -1,0 +1,56 @@
+# dev profile
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  devtools:
+    # exclude hot deploy files
+    restart:
+      exclude: static/**,public/**,config/application.yml
+      # disable hot deploy
+      enabled: false
+
+logging:
+  # define log group
+  group:
+    raymond:
+      - com.raymond.quickstart.controller
+      - com.raymond.quickstart.serivce
+      - com.raymond.quickstart.config
+
+  level:
+    root: info
+    # specify com.raymond package's log level
+    com.raymond: debug
+    # specify group's log level
+    raymond: info
+  # set log pattern
+  pattern:
+    console: "%d - %clr(%5p) --- [%16t] %clr(%-40.40c){cyan} : %m%n"
+  file:
+    name: server.log
+    path: /logs
+
+  logback:
+    rollingpolicy:
+      max-file-size: 4KB
+      file-name-pattern: logs/server.%d{yyyy-MM-dd}.%i.log
+
+# Test configuration property
+servers:
+   # supports the following format
+   # ipaddress: 192.168.0.1
+   # ip_address: 192.168.0.1
+   # ip-address: 192.168.0.1  this format is recommended !!!
+   # IPADDRESS: 192.168.0.1
+  ip-address: 192.168.0.1
+  port: 2345
+  timeout: -1
+  serverTimeout: 3
+  myDataSize: 10
+
+jdbc-template-config:
+  fetchSize: 99
+  queryTimeout: 66
+

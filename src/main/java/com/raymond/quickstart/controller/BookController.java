@@ -45,6 +45,16 @@ public class BookController {
 
     @GetMapping("/{id}")
     public R getById(@PathVariable("id") Integer id) {
+        System.out.println("Test deploy...");
+        System.out.println("Test deploy...");
+        System.out.println("Test deploy...");
+        System.out.println("Test deploy...");
+        System.out.println("Test deploy...");
+        System.out.println("Test deploy...");
+        System.out.println("Test deploy...");
+        System.out.println("Test deploy...");
+        System.out.println("Test deploy...");
+        System.out.println("Test deploy...");
         return new R(true, bookService.getById(id));
     }
 

@@ -1,0 +1,5 @@
+# mvc config
+server:
+  servlet:
+    context-path: /test
+  port: 8888

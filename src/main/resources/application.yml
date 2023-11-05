@@ -1,26 +1,12 @@
-server:
-  port: 80
-
-logging:
-  level:
-    root: info
-
-# Spring druid
+# apply profile
 spring:
-  datasource:
-    druid:
-      username: root
-      password: root
-      url: jdbc:mysql://localhost:3306/ssm_db?serverTimezone=Asia/Shanghai&useSSL=false
-      driver-class-name: com.mysql.cj.jdbc.Driver
-
-# mybatis-plus
-mybatis-plus:
-  global-config:
-    db-config:
-      # 自增主键策略
-      id-type: auto
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  profiles:
+    # get property from pom.xml
+    active: @profile.active@
+    # recommend to use group property
+    group:
+      "dev": devDb,devRedis,devMvc
+      "test": testDb,testRedis,testMvc
+      "prod": prodDb,prodRedis,prodMvc
 
 

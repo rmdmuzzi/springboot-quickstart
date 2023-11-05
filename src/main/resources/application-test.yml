@@ -1,0 +1,9 @@
+# test profile
+spring:
+  config:
+    activate:
+      on-profile: test
+
+logging:
+  level:
+    root: info
